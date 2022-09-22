@@ -1,0 +1,32 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Select Movie{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="heading">Select Movie</h1>
+  <p>
+    {% for index in range(0, result_int) %}
+    <h4><a href="{{url_for('new_home',
+    yes = 111,
+    title = responses.json()['results'][index]['title'],
+    release_date = responses.json()['results'][index]['release_date'],
+    poster_path = responses.json()['results'][index]['poster_path'],
+    vote_average = responses.json()['results'][index]['vote_average'],
+    overview = responses.json()['results'][index]['overview'],
+    id =  responses.json()['results'][index]['id'],
+    )}}">
+  {{responses.json()["results"][index]["title"]}} - {{responses.json()["results"][index]["release_date"]}}</a></h4>
+    {% endfor %}
+  </p>
+
+</div>
+{% endblock %}
